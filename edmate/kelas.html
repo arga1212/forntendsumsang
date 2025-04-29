@@ -28,6 +28,261 @@
     <link rel="stylesheet" href="assets/css/jquery-jvectormap-2.0.5.css">
     <!-- Main css -->
     <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #eaefff;
+            --secondary-color: #6c757d;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --info-color: #3498db;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --border-radius: 10px;
+            --box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            --purple-color: #6142FF;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f8ff;
+        }
+        
+        .card {
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: none;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header-custom {
+            padding: 1.25rem;
+            color: white;
+            position: relative;
+        }
+        
+        .card-header-custom h5 {
+            font-weight: 600;
+        }
+        
+        .card-header-actions {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .badge {
+            padding: 0.5rem 0.8rem;
+            font-weight: 500;
+            border-radius: 50px;
+        }
+        
+        .badge.subject-badge {
+            font-size: 12px;
+            padding: 0.35rem 0.8rem;
+        }
+        
+        .btn-main {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-main:hover {
+            background-color: #3652d9;
+            border-color: #3652d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-outline-main {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .btn-outline-main:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .bg-main-600 {
+            background-color: var(--primary-color);
+        }
+        
+        .bg-purple-600 {
+            background-color: var(--purple-color);
+        }
+        
+        .bg-warning-600 {
+            background-color: var(--warning-color);
+        }
+        
+        .modal-content {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .modal-header {
+            background-color: var(--primary-light);
+            border-bottom: none;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .modal-footer {
+            border-top: none;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            border-color: #e2e8f0;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+        
+        .class-card-header {
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            padding: 1.5rem;
+        }
+        
+        .class-card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+        }
+        
+        .class-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .class-stat-item {
+            text-align: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.75rem;
+            flex: 1;
+            margin: 0 0.25rem;
+        }
+        
+        .class-stat-item:first-child {
+            margin-left: 0;
+        }
+        
+        .class-stat-item:last-child {
+            margin-right: 0;
+        }
+        
+        .class-stat-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+        
+        .class-stat-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .class-description {
+            height: 80px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+        
+        .inactive-class {
+            opacity: 0.7;
+        }
+        
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        .dropdown-item {
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .breadcrumb-with-buttons {
+            background-color: white;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+        
+        .class-action-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .class-action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .actions-dropdown .dropdown-toggle::after {
+            display: none;
+        }
+    </style>
 </head> 
 <body>
     
@@ -43,141 +298,137 @@
 
 
     <!-- ============================ Sidebar Start ============================ -->
-
-<aside class="sidebar">
-    <!-- sidebar close btn -->
-     <button type="button" class="sidebar-close-btn text-gray-500 hover-text-white hover-bg-main-600 text-md w-24 h-24 border border-gray-100 hover-border-main-600 d-xl-none d-flex flex-center rounded-circle position-absolute"><i class="ph ph-x"></i></button>
-    <!-- sidebar close btn -->
+    <aside class="sidebar">
+        <!-- sidebar close btn -->
+         <button type="button" class="sidebar-close-btn text-gray-500 hover-text-white hover-bg-main-600 text-md w-24 h-24 border border-gray-100 hover-border-main-600 d-xl-none d-flex flex-center rounded-circle position-absolute"><i class="ph ph-x"></i></button>
+        <!-- sidebar close btn -->
+        
+        <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
+            <img src="assets/images/logo/logo.png" alt="Logo">
+        </a>
     
-    <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-        <img src="assets/images/logo/logo.png" alt="Logo">
-    </a>
-
-    <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
-        <div class="p-20 pt-10">
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu__item has-dropdown">
-                    <a href="javascript:void(0)" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-squares-four"></i></span>
-                        <span class="text">Dashboard</span>
-                    </a>
-                    <!-- Submenu start -->
-                    <ul class="sidebar-submenu">
-                        <li class="sidebar-submenu__item">
-                            <a href="index.html" class="sidebar-submenu__link">Dashboard Guru</a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="student-dashboard.html" class="sidebar-submenu__link">Dashboard Siswa</a>
-                        </li>
-                    </ul>
-                    <!-- Submenu End -->
-                </li>
-                <li class="sidebar-menu__item has-dropdown">
-                    <a href="javascript:void(0)" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-microphone"></i></span>
-                        <span class="text">Rekaman SmartNote</span>
-                    </a>
-                    <!-- Submenu start -->
-                    <ul class="sidebar-submenu">
-                        <li class="sidebar-submenu__item">
-                            <a href="rekaman-baru.html" class="sidebar-submenu__link">Rekaman Baru</a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="arsip-rekaman.html" class="sidebar-submenu__link">Arsip Rekaman</a>
-                        </li>
-                    </ul>
-                    <!-- Submenu End -->
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="upload-audio.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-upload"></i></span>
-                        <span class="text">Upload Audio</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="rangkuman-ai.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-book-open"></i></span>
-                        <span class="text">Rangkuman AI</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="modul-ai.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-notebook"></i></span>
-                        <span class="text">Modul AI</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="soal-ai.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                        <span class="text">Soal AI</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="performa-siswa.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-chart-bar"></i></span>
-                        <span class="text">Performa Siswa</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item active">
-                    <a href="kelas.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-users"></i></span>
-                        <span class="text">Kelas</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="gaya-belajar.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-brain"></i></span>
-                        <span class="text">Gaya Belajar</span>
-                    </a>
-                </li>
-                
-                <li class="sidebar-menu__item">
-                    <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="setting.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-gear"></i></span>
-                        <span class="text">Pengaturan Akun</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-menu__item has-dropdown">
-                    <a href="javascript:void(0)" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-shield-check"></i></span>
-                        <span class="text">Autentikasi</span>
-                    </a>
-                    <!-- Submenu start -->
-                    <ul class="sidebar-submenu">
-                        <li class="sidebar-submenu__item">
-                            <a href="sign-in.html" class="sidebar-submenu__link">Masuk</a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="sign-up.html" class="sidebar-submenu__link">Daftar</a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="forgot-password.html" class="sidebar-submenu__link">Lupa Password</a>
-                        </li>
-                    </ul>
-                    <!-- Submenu End -->
-                </li>
-                
-            </ul>
-        </div>
-        <div class="p-20 pt-80">
-            <div class="bg-main-50 p-20 pt-0 rounded-16 text-center mt-74">
-                <span class="border border-5 bg-white mx-auto border-primary-50 w-114 h-114 rounded-circle flex-center text-success-600 text-2xl translate-n74">
-                    <img src="assets/images/icons/certificate.png" alt="" class="centerised-img">
-                </span>
-                <div class="mt-n74">
-                    <h5 class="mb-4 mt-22">Upgrade ke Pro</h5>
-                    <p class="">Akses fitur premium dan lebih banyak penyimpanan</p>
-                    <a href="pricing-plan.html" class="btn btn-main mt-16 rounded-pill">Dapatkan Akses</a>
+        <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
+            <div class="p-20 pt-10">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-squares-four"></i></span>
+                            <span class="text">Dashboard Guru</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="dashboard.html" class="sidebar-submenu__link">Dashboard Guru</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-microphone"></i></span>
+                            <span class="text">Rekaman Microphone</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="rekaman-baru.html" class="sidebar-submenu__link">Rekaman Baru</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="arsip-rekaman.html" class="sidebar-submenu__link">Arsip Rekaman</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="upload-audio.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-upload"></i></span>
+                            <span class="text">Upload Audio</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="rangkuman-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-book-open"></i></span>
+                            <span class="text">Rangkuman</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="modul-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-notebook"></i></span>
+                            <span class="text">Modul</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="soal-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-clipboard-text"></i></span>
+                            <span class="text">Soal</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="performa-siswa.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-chart-bar"></i></span>
+                            <span class="text">Performa Siswa</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="kelas.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-users"></i></span>
+                            <span class="text">Kelas</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="gaya-belajar.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-brain"></i></span>
+                            <span class="text">Gaya Belajar</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu__item">
+                        <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="setting.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-gear"></i></span>
+                            <span class="text">Pengaturan Akun</span>
+                        </a>
+                    </li>
+    
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-shield-check"></i></span>
+                            <span class="text">Autentikasi</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="sign-in.html" class="sidebar-submenu__link">Masuk</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="sign-up.html" class="sidebar-submenu__link">Daftar</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="forgot-password.html" class="sidebar-submenu__link">Lupa Password</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="p-20 pt-80">
+                <div class="bg-main-50 p-20 pt-0 rounded-16 text-center mt-74">
+                    <span class="border border-5 bg-white mx-auto border-primary-50 w-114 h-114 rounded-circle flex-center text-success-600 text-2xl translate-n74">
+                        <img src="assets/images/icons/certificate.png" alt="" class="centerised-img">
+                    </span>
+                    <div class="mt-n74">
+                        <h5 class="mb-4 mt-22">Upgrade ke Pro</h5>
+                        <p class="">Akses fitur premium dan lebih banyak penyimpanan</p>
+                        <a href="pricing-plan.html" class="btn btn-main mt-16 rounded-pill">Dapatkan Akses</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-</aside>    
+    
+    </aside> 
 <!-- ============================ Sidebar End  ============================ -->
 
 
@@ -379,42 +630,49 @@
                 <!-- Card 1 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <div class="position-relative">
-                            <div class="bg-main-600 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 10A</h5>
-                                    <span class="badge bg-success">Fisika</span>
-                                </div>
-                                <p class="mb-0">32 Siswa</p>
+                        <div class="class-card-header bg-main-600 text-white">
+                            <h5 class="mb-2 text-white">Kelas 10A</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-main-600 subject-badge">Fisika</span>
+                                <span class="text-white">32 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-success">Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-success">Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">12</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">12</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">35</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas fisika dasar untuk siswa kelas 10. Mencakup materi mekanika, kinematika, dan dinamika.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas fisika dasar untuk siswa kelas 10. Mencakup materi mekanika, kinematika, dan dinamika.</p>
+                            </div>
                             <div class="d-grid gap-2">
                                 <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -424,42 +682,49 @@
                 <!-- Card 2 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <div class="position-relative">
-                            <div class="bg-purple-600 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 11B</h5>
-                                    <span class="badge bg-purple">Kimia</span>
-                                </div>
-                                <p class="mb-0">28 Siswa</p>
+                        <div class="class-card-header bg-purple-600 text-white">
+                            <h5 class="mb-2 text-white">Kelas 11B</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-purple-color subject-badge">Kimia</span>
+                                <span class="text-white">28 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-success">Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-success">Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">8</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">8</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">22</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas kimia organik untuk siswa kelas 11. Fokus pada struktur molekul dan ikatan kimia.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas kimia organik untuk siswa kelas 11. Fokus pada struktur molekul dan ikatan kimia.</p>
+                            </div>
                             <div class="d-grid gap-2">
                                 <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -469,42 +734,49 @@
                 <!-- Card 3 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <div class="position-relative">
-                            <div class="bg-warning-600 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 9C</h5>
-                                    <span class="badge bg-warning">Matematika</span>
-                                </div>
-                                <p class="mb-0">35 Siswa</p>
+                        <div class="class-card-header bg-warning-600 text-white">
+                            <h5 class="mb-2 text-white">Kelas 9C</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-warning-color subject-badge">Matematika</span>
+                                <span class="text-white">35 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-success">Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-success">Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">15</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">15</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">45</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas matematika untuk siswa kelas 9. Mencakup aljabar, geometri, dan trigonometri dasar.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas matematika untuk siswa kelas 9. Mencakup aljabar, geometri, dan trigonometri dasar.</p>
+                            </div>
                             <div class="d-grid gap-2">
                                 <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -514,42 +786,49 @@
                 <!-- Card 4 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <div class="position-relative">
-                            <div class="bg-danger text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 12A</h5>
-                                    <span class="badge bg-danger">Ekonomi</span>
-                                </div>
-                                <p class="mb-0">29 Siswa</p>
+                        <div class="class-card-header bg-danger text-white">
+                            <h5 class="mb-2 text-white">Kelas 12A</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-danger subject-badge">Ekonomi</span>
+                                <span class="text-white">29 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-success">Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-success">Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">10</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">10</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">30</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas ekonomi untuk siswa kelas 12. Fokus pada pasar modal, investasi, dan ekonomi makro.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas ekonomi untuk siswa kelas 12. Fokus pada pasar modal, investasi, dan ekonomi makro.</p>
+                            </div>
                             <div class="d-grid gap-2">
                                 <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -559,42 +838,49 @@
                 <!-- Card 5 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <div class="position-relative">
-                            <div class="bg-secondary text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 10B</h5>
-                                    <span class="badge bg-secondary">Sejarah</span>
-                                </div>
-                                <p class="mb-0">30 Siswa</p>
+                        <div class="class-card-header bg-secondary text-white">
+                            <h5 class="mb-2 text-white">Kelas 10B</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-secondary subject-badge">Sejarah</span>
+                                <span class="text-white">30 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-success">Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-success">Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">7</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">7</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">18</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas sejarah Indonesia untuk siswa kelas 10. Fokus pada kerajaan-kerajaan besar Nusantara.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas sejarah Indonesia untuk siswa kelas 10. Fokus pada kerajaan-kerajaan besar Nusantara.</p>
+                            </div>
                             <div class="d-grid gap-2">
                                 <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -603,67 +889,93 @@
                 
                 <!-- Card 6 - Inactive -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100" style="opacity: 0.8;">
-                        <div class="position-relative">
-                            <div class="bg-info text-white p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 text-white">Kelas 11A</h5>
-                                    <span class="badge bg-info">B. Inggris</span>
-                                </div>
-                                <p class="mb-0">33 Siswa</p>
+                    <div class="card h-100 inactive-class">
+                        <div class="class-card-header bg-info text-white">
+                            <h5 class="mb-2 text-white">Kelas 11A</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-white text-info subject-badge">B. Inggris</span>
+                                <span class="text-white">33 Siswa</span>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
-                                    </ul>
+                            <div class="actions-dropdown">
+                                <div class="class-card-badge">
+                                    <div class="dropdown">
+                                        <button class="class-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class="ph ph-pencil me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteClassModal"><i class="ph ph-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted mb-1">Status Aktivitas:</p>
-                                    <span class="badge bg-secondary">Tidak Aktif</span>
+                            <div class="class-stats">
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Status</div>
+                                    <div class="class-stat-value">
+                                        <span class="badge bg-secondary">Tidak Aktif</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-muted mb-1">Rekaman:</p>
-                                    <span class="fw-bold">5</span>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Rekaman</div>
+                                    <div class="class-stat-value">5</div>
+                                </div>
+                                <div class="class-stat-item">
+                                    <div class="class-stat-label">Soal</div>
+                                    <div class="class-stat-value">15</div>
                                 </div>
                             </div>
-                            <p class="text-muted mb-3">Kelas bahasa Inggris untuk siswa kelas 11. Fokus pada tata bahasa dan keterampilan berbicara.</p>
-                            
+                            <div class="class-description">
+                                <p class="text-muted mb-0">Kelas bahasa Inggris untuk siswa kelas 11. Fokus pada tata bahasa dan keterampilan berbicara.</p>
+                            </div>
                             <div class="d-grid gap-2">
-                                <a href="detail-kelas.html" class="btn btn-main">
-                                    <i class="ph ph-users me-2"></i> Lihat Detail
+                                <a href="detail-kelas.html" class="btn btn-outline-secondary">
+                                    <i class="ph ph-arrow-right me-2"></i> Lihat Detail
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Empty State (when no classes) -->
+                <!--
+                <div class="col-12">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="ph ph-users"></i>
+                        </div>
+                        <h4>Belum Ada Kelas</h4>
+                        <p class="text-muted">Anda belum memiliki kelas. Mulai dengan menambahkan kelas baru.</p>
+                        <button class="btn btn-main mt-3" data-bs-toggle="modal" data-bs-target="#addClassModal">
+                            <i class="ph ph-plus me-2"></i> Tambah Kelas Baru
+                        </button>
+                    </div>
+                </div>
+                -->
             </div>
 
             <!-- Modal Tambah Kelas -->
             <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addClassModalLabel">Tambah Kelas Baru</h5>
+                            <h5 class="modal-title" id="addClassModalLabel">
+                                <i class="ph ph-users-plus me-2 text-primary-color"></i>
+                                Tambah Kelas Baru
+                            </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="className" class="form-label">Nama Kelas</label>
-                                    <input type="text" class="form-control" id="className" placeholder="Contoh: Kelas 10A">
+                                    <label for="className" class="form-label fw-medium">Nama Kelas</label>
+                                    <input type="text" class="form-control form-control-lg" id="className" placeholder="Contoh: Kelas 10A">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="classSubject" class="form-label">Mata Pelajaran</label>
-                                    <select class="form-select" id="classSubject">
+                                    <label for="classSubject" class="form-label fw-medium">Mata Pelajaran</label>
+                                    <select class="form-select form-select-lg" id="classSubject">
                                         <option selected>Pilih Mata Pelajaran</option>
                                         <option value="Fisika">Fisika</option>
                                         <option value="Kimia">Kimia</option>
@@ -676,14 +988,18 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="classDescription" class="form-label">Deskripsi Kelas</label>
+                                    <label for="classDescription" class="form-label fw-medium">Deskripsi Kelas</label>
                                     <textarea class="form-control" id="classDescription" rows="3" placeholder="Deskripsi singkat tentang kelas"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="studentCount" class="form-label fw-medium">Jumlah Siswa</label>
+                                    <input type="number" class="form-control" id="studentCount" placeholder="Masukkan jumlah siswa">
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="button" class="btn btn-main">Simpan</button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-main px-4">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -691,21 +1007,24 @@
 
             <!-- Modal Edit Kelas -->
             <div class="modal fade" id="editClassModal" tabindex="-1" aria-labelledby="editClassModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editClassModalLabel">Edit Kelas</h5>
+                            <h5 class="modal-title" id="editClassModalLabel">
+                                <i class="ph ph-pencil-simple me-2 text-primary-color"></i>
+                                Edit Kelas
+                            </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="editClassName" class="form-label">Nama Kelas</label>
-                                    <input type="text" class="form-control" id="editClassName" value="Kelas 10A">
+                                    <label for="editClassName" class="form-label fw-medium">Nama Kelas</label>
+                                    <input type="text" class="form-control form-control-lg" id="editClassName" value="Kelas 10A">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editClassSubject" class="form-label">Mata Pelajaran</label>
-                                    <select class="form-select" id="editClassSubject">
+                                    <label for="editClassSubject" class="form-label fw-medium">Mata Pelajaran</label>
+                                    <select class="form-select form-select-lg" id="editClassSubject">
                                         <option>Pilih Mata Pelajaran</option>
                                         <option value="Fisika" selected>Fisika</option>
                                         <option value="Kimia">Kimia</option>
@@ -718,11 +1037,15 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editClassDescription" class="form-label">Deskripsi Kelas</label>
+                                    <label for="editClassDescription" class="form-label fw-medium">Deskripsi Kelas</label>
                                     <textarea class="form-control" id="editClassDescription" rows="3">Kelas fisika dasar untuk siswa kelas 10. Mencakup materi mekanika, kinematika, dan dinamika.</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editClassStatus" class="form-label">Status Aktivitas</label>
+                                    <label for="editStudentCount" class="form-label fw-medium">Jumlah Siswa</label>
+                                    <input type="number" class="form-control" id="editStudentCount" value="32">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editClassStatus" class="form-label fw-medium">Status Aktivitas</label>
                                     <select class="form-select" id="editClassStatus">
                                         <option value="active" selected>Aktif</option>
                                         <option value="inactive">Tidak Aktif</option>
@@ -731,8 +1054,8 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="button" class="btn btn-main">Simpan Perubahan</button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-main px-4">Simpan Perubahan</button>
                         </div>
                     </div>
                 </div>
@@ -740,18 +1063,25 @@
 
             <!-- Modal Hapus Kelas -->
             <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="deleteClassModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteClassModalLabel">Konfirmasi Hapus</h5>
+                        <div class="modal-header bg-danger-50">
+                            <h5 class="modal-title text-danger" id="deleteClassModalLabel">
+                                <i class="ph ph-warning-circle me-2"></i>
+                                Konfirmasi Hapus
+                            </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus kelas ini? Semua data terkait kelas akan dihapus dan tindakan ini tidak dapat dibatalkan.</p>
+                        <div class="modal-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="ph ph-trash text-danger" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="mb-3">Apakah Anda yakin?</h5>
+                            <p>Semua data terkait kelas akan dihapus dan tindakan ini tidak dapat dibatalkan. Rekaman, rangkuman, modul, dan soal yang terkait dengan kelas ini juga akan terhapus.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="button" class="btn btn-danger">Hapus</button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-danger rounded-pill px-4">Hapus</button>
                         </div>
                     </div>
                 </div>
@@ -760,7 +1090,7 @@
         
         <div class="dashboard-footer">
             <div class="flex-between flex-wrap gap-16">
-                <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright SmartNote 2025, All Right Reserved</p>
+                <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright SmartMic 2025, All Right Reserved</p>
                 <div class="flex-align flex-wrap gap-16">
                     <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Lisensi</a>
                     <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Dukungan</a>

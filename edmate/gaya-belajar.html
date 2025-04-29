@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title>SmartNote - Gaya Belajar</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- file upload -->
+    <link rel="stylesheet" href="assets/css/file-upload.css">
+    <!-- file upload -->
+    <link rel="stylesheet" href="assets/css/plyr.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <!-- full calendar -->
+    <link rel="stylesheet" href="assets/css/full-calendar.css">
+    <!-- jquery Ui -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <!-- editor quill Ui -->
+    <link rel="stylesheet" href="assets/css/editor-quill.css">
+    <!-- apex charts Css -->
+    <link rel="stylesheet" href="assets/css/apexcharts.css">
+    <!-- calendar Css -->
+    <link rel="stylesheet" href="assets/css/calendar.css">
+    <!-- jvector map Css -->
+    <link rel="stylesheet" href="assets/css/jquery-jvectormap-2.0.5.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #eaefff;
+            --secondary-color: #6c757d;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --border-radius: 10px;
+            --box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            
+            --visual-color: #667eea;
+            --auditory-color: #2ecc71;
+            --reading-color: #f39c12;
+            --kinesthetic-color: #6142FF;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f8ff;
+        }
+        
+        .card {
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: none;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-style-card {
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .learning-style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .learning-style-card .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+        
+        .learning-style-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .learning-style-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .learning-style-card ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        .learning-style-card ul li {
+            margin-bottom: 10px;
+        }
+        
+        .visual {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .auditory {
+            background: linear-gradient(135deg, #42b883, #347474);
+            color: white;
+        }
+        
+        .reading {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+        }
+        
+        .kinesthetic {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            color: #333;
+        }
+        
+        .student-card {
+            display: flex;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            align-items: center;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .student-info {
+            flex-grow: 1;
+        }
+        
+        .student-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .learning-style-label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 5px;
+        }
+        
+        .visual-label {
+            background-color: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+        
+        .auditory-label {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        
+        .reading-label {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        
+        .kinesthetic-label {
+            background-color: rgba(97, 66, 255, 0.2);
+            color: #6142FF;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .resource-card h5 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .resource-card ul {
+            padding-left: 20px;
+        }
+        
+        .resource-card ul li {
+            margin-bottom: 10px;
+        }
+        
+        .resource-card .btn {
+            margin-top: 15px;
+        }
+        
+        .recommendation-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 30px;
+            border: none;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .custom-select {
+            border-radius: 30px;
+            padding: 8px 15px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8f9fa;
+            font-size: 14px;
+        }
+        
+        /* Styling for radar chart */
+        .radar-chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        /* Custom tooltips */
+        .tooltip-custom {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .tooltip-custom .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip-custom:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head> 
+<body>
+    
+<!--==================== Preloader Start ====================-->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+<!--==================== Preloader End ====================-->
+
+<!--==================== Sidebar Overlay End ====================-->
+<div class="side-overlay"></div>
+<!--==================== Sidebar Overlay End ====================-->
+
+    <!-- ============================ Sidebar Start ============================ -->
+
+    
+    <aside class="sidebar">
+        <!-- sidebar close btn -->
+         <button type="button" class="sidebar-close-btn text-gray-500 hover-text-white hover-bg-main-600 text-md w-24 h-24 border border-gray-100 hover-border-main-600 d-xl-none d-flex flex-center rounded-circle position-absolute"><i class="ph ph-x"></i></button>
+        <!-- sidebar close btn -->
+        
+        <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
+            <img src="assets/images/logo/logo.png" alt="Logo">
+        </a>
+    
+        <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
+            <div class="p-20 pt-10">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-squares-four"></i></span>
+                            <span class="text">Dashboard Guru</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="dashboard.html" class="sidebar-submenu__link">Dashboard Guru</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-microphone"></i></span>
+                            <span class="text">Rekaman Microphone</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="rekaman-baru.html" class="sidebar-submenu__link">Rekaman Baru</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="arsip-rekaman.html" class="sidebar-submenu__link">Arsip Rekaman</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="upload-audio.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-upload"></i></span>
+                            <span class="text">Upload Audio</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="rangkuman-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-book-open"></i></span>
+                            <span class="text">Rangkuman</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="modul-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-notebook"></i></span>
+                            <span class="text">Modul</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="soal-ai.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-clipboard-text"></i></span>
+                            <span class="text">Soal</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="performa-siswa.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-chart-bar"></i></span>
+                            <span class="text">Performa Siswa</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="kelas.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-users"></i></span>
+                            <span class="text">Kelas</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="gaya-belajar.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-brain"></i></span>
+                            <span class="text">Gaya Belajar</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu__item">
+                        <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
+                    </li>
+                    <li class="sidebar-menu__item">
+                        <a href="setting.html" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-gear"></i></span>
+                            <span class="text">Pengaturan Akun</span>
+                        </a>
+                    </li>
+    
+                    <li class="sidebar-menu__item has-dropdown">
+                        <a href="javascript:void(0)" class="sidebar-menu__link">
+                            <span class="icon"><i class="ph ph-shield-check"></i></span>
+                            <span class="text">Autentikasi</span>
+                        </a>
+                        <!-- Submenu start -->
+                        <ul class="sidebar-submenu">
+                            <li class="sidebar-submenu__item">
+                                <a href="sign-in.html" class="sidebar-submenu__link">Masuk</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="sign-up.html" class="sidebar-submenu__link">Daftar</a>
+                            </li>
+                            <li class="sidebar-submenu__item">
+                                <a href="forgot-password.html" class="sidebar-submenu__link">Lupa Password</a>
+                            </li>
+                        </ul>
+                        <!-- Submenu End -->
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="p-20 pt-80">
+                <div class="bg-main-50 p-20 pt-0 rounded-16 text-center mt-74">
+                    <span class="border border-5 bg-white mx-auto border-primary-50 w-114 h-114 rounded-circle flex-center text-success-600 text-2xl translate-n74">
+                        <img src="assets/images/icons/certificate.png" alt="" class="centerised-img">
+                    </span>
+                    <div class="mt-n74">
+                        <h5 class="mb-4 mt-22">Upgrade ke Pro</h5>
+                        <p class="">Akses fitur premium dan lebih banyak penyimpanan</p>
+                        <a href="pricing-plan.html" class="btn btn-main mt-16 rounded-pill">Dapatkan Akses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </aside> 
+<!-- ============================ Sidebar End  ============================ -->
+
+    <div class="dashboard-main-wrapper">
+        <div class="top-navbar flex-between gap-16">
+
+    <div class="flex-align gap-16">
+        <!-- Toggle Button Start -->
+         <button type="button" class="toggle-btn d-xl-none d-flex text-26 text-gray-500"><i class="ph ph-list"></i></button>
+        <!-- Toggle Button End -->
+        
+        <form action="#" class="w-350 d-sm-block d-none">
+            <div class="position-relative">
+                <button type="submit" class="input-icon text-xl d-flex text-gray-100 pointer-event-none"><i class="ph ph-magnifying-glass"></i></button> 
+                <input type="text" class="form-control ps-40 h-40 border-transparent focus-border-main-600 bg-main-50 rounded-pill placeholder-15" placeholder="Cari...">
+            </div>
+        </form>
+    </div>
+
+    <div class="flex-align gap-16">
+        <div class="flex-align gap-8">
+            <!-- Notification Start -->
+            <div class="dropdown">
+                <button class="dropdown-btn shaking-animation text-gray-500 w-40 h-40 bg-main-50 hover-bg-main-100 transition-2 rounded-circle text-xl flex-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="position-relative">
+                        <i class="ph ph-bell"></i>
+                        <span class="alarm-notify position-absolute end-0"></span>
+                    </span>
+                </button>
+                <div class="dropdown-menu dropdown-menu--lg border-0 bg-transparent p-0">
+                    <div class="card border border-gray-100 rounded-12 box-shadow-custom p-0 overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="py-8 px-24 bg-main-600">
+                                <div class="flex-between">
+                                    <h5 class="text-xl fw-semibold text-white mb-0">Notifikasi</h5>
+                                    <div class="flex-align gap-12">
+                                        <button type="button" class="bg-white rounded-6 text-sm px-8 py-2 hover-text-primary-600"> Baru </button>
+                                        <button type="button" class="close-dropdown hover-scale-1 text-xl text-white"><i class="ph ph-x"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-24 max-h-270 overflow-y-auto scroll-sm">
+                                <div class="d-flex align-items-start gap-12">
+                                    <img src="assets/images/thumbs/notification-img1.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
+                                    <div class="border-bottom border-gray-100 mb-24 pb-24">
+                                        <div class="flex-align gap-4">
+                                            <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Rekaman "Bab 3 - Fisika Dasar" telah selesai diproses oleh AI. </a>
+                                        </div>
+                                        <div class="flex-align gap-6 mt-8">
+                                            <img src="assets/images/icons/google-drive.png" alt="">
+                                            <div class="flex-align gap-4">
+                                                <p class="text-gray-900 text-sm text-line-1">Lihat hasil rekaman</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-16 flex-align gap-8">
+                                            <button type="button" class="btn btn-main py-8 text-15 fw-normal px-16">Lihat Hasil</button>
+                                        </div>
+                                        <span class="text-gray-200 text-13 mt-8">2 menit yang lalu</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start gap-12">
+                                    <img src="assets/images/thumbs/notification-img2.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
+                                    <div class="">
+                                        <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Siswa Anda telah menyelesaikan soal "Bab 4 - Matematika Dasar"</a>
+                                        <span class="text-gray-200 text-13">15 menit yang lalu</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="py-13 px-24 fw-bold text-center d-block text-primary-600 border-top border-gray-100 hover-text-decoration-underline"> Lihat Semua </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Notification Start -->
+            
+            <!-- Language Start -->
+            <div class="dropdown">
+                <button class="text-gray-500 w-40 h-40 bg-main-50 hover-bg-main-100 transition-2 rounded-circle text-xl flex-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ph ph-globe"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
+                    <div class="card border border-gray-100 rounded-12 box-shadow-custom">
+                        <div class="card-body">
+                            <div class="max-h-270 overflow-y-auto scroll-sm pe-8">
+                                <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0 mb-16">
+                                  <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="indonesian"> 
+                                    <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
+                                      <img src="assets/images/thumbs/flag3.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
+                                      <span class="text-15 fw-semibold mb-0">Indonesia</span>
+                                    </span>
+                                  </label>
+                                  <input class="form-check-input" type="radio" name="language" id="indonesian" checked>
+                                </div>
+                                <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0 mb-16">
+                                  <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="english"> 
+                                    <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
+                                      <img src="assets/images/thumbs/flag3.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
+                                      <span class="text-15 fw-semibold mb-0">English</span>
+                                    </span>
+                                  </label>
+                                  <input class="form-check-input" type="radio" name="language" id="english">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Language Start -->
+        </div>
+
+
+        <!-- User Profile Start -->
+        <div class="dropdown">
+            <button class="users arrow-down-icon border border-gray-200 rounded-pill p-4 d-inline-block pe-40 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="position-relative">
+                    <img src="assets/images/thumbs/user-img.png" alt="Image" class="h-32 w-32 rounded-circle">
+                    <span class="activation-badge w-8 h-8 position-absolute inset-block-end-0 inset-inline-end-0"></span>
+                </span>
+            </button>
+            <div class="dropdown-menu dropdown-menu--lg border-0 bg-transparent p-0">
+                <div class="card border border-gray-100 rounded-12 box-shadow-custom">
+                    <div class="card-body">
+                        <div class="flex-align gap-8 mb-20 pb-20 border-bottom border-gray-100">
+                            <img src="assets/images/thumbs/user-img.png" alt="" class="w-54 h-54 rounded-circle">
+                            <div class="">
+                                <h4 class="mb-0">Anita Wijaya</h4>
+                                <p class="fw-medium text-13 text-gray-200">anita.wijaya@sekolah.id</p>
+                            </div>
+                        </div>
+                        <ul class="max-h-270 overflow-y-auto scroll-sm pe-4">
+                            <li class="mb-4">
+                                <a href="setting.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                                    <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-gear"></i></span>
+                                    <span class="text">Pengaturan Akun</span>
+                                </a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="pricing-plan.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                                    <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-bar"></i></span>
+                                    <span class="text">Upgrade Paket</span>
+                                </a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="performa-siswa.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                                    <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-line-up"></i></span>
+                                    <span class="text">Aktivitas Harian</span>
+                                </a>
+                            </li>
+                            <li class="pt-8 border-top border-gray-100">
+                                <a href="sign-in.html" class="py-12 text-15 px-20 hover-bg-danger-50 text-gray-300 hover-text-danger-600 rounded-8 flex-align gap-8 fw-medium text-15">
+                                    <span class="text-2xl text-danger-600 d-flex"><i class="ph ph-sign-out"></i></span>
+                                    <span class="text">Keluar</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Profile Start -->
+
+    </div>
+</div>
+
+        
+        <div class="dashboard-body">
+            <!-- Breadcrumb Start -->
+            <div class="breadcrumb mb-24">
+                <ul class="flex-align gap-4">
+                    <li><a href="index.html" class="text-gray-200 fw-normal text-15 hover-text-main-600">Dashboard</a></li>
+                    <li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+                    <li><span class="text-main-600 fw-normal text-15">Gaya Belajar</span></li>
+                </ul>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Filter Controls -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                <div class="d-flex gap-2">
+                    <button class="tab-btn active" id="btnOverview">Ringkasan</button>
+                    <button class="tab-btn" id="btnVisual">Visual</button>
+                    <button class="tab-btn" id="btnAuditory">Auditori</button>
+                    <button class="tab-btn" id="btnReading">Reading</button>
+                    <button class="tab-btn" id="btnKinesthetic">Kinestetik</button>
+                </div>
+                <div class="d-flex gap-2">
+                    <select class="custom-select">
+                        <option>Semua Kelas</option>
+                        <option>Kelas 10A</option>
+                        <option>Kelas 11B</option>
+                        <option>Kelas 9C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Intro Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h3 class="mb-3">Analisis Gaya Belajar dengan AI</h3>
+                                    <p class="mb-4">SmartMic menggunakan kecerdasan buatan untuk menganalisis bagaimana siswa belajar melalui rekaman dan interaksi mereka dengan konten pembelajaran. Kami mengidentifikasi empat gaya belajar utama untuk membantu guru menyesuaikan pengajaran.</p>
+                                    <p>Dengan memahami gaya belajar dominan siswa, Anda dapat:</p>
+                                    <ul class="mb-4">
+                                        <li class="mb-2">Merancang materi pembelajaran yang lebih efektif</li>
+                                        <li class="mb-2">Meningkatkan keterlibatan siswa dalam pembelajaran</li>
+                                        <li class="mb-2">Menyesuaikan pendekatan pengajaran dengan kebutuhan individual</li>
+                                        <li class="mb-2">Meningkatkan hasil belajar secara keseluruhan</li>
+                                    </ul>
+                                    <button class="btn btn-main px-4 py-2 rounded-pill">
+                                        <i class="ph ph-file-pdf me-2"></i> Unduh Laporan Lengkap
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-center">
+                                        <div id="learningStyleDonutChart" class="w-100 d-inline-block"></div>
+                                        <div class="d-flex justify-content-around mt-3">
+                                            <div class="text-center">
+                                                <span class="d-inline-block w-12 h-12 bg-white border border-3 border-visual-color rounded-circle"></span>
+                                                <div class="text-13 mt-2">Visual <span class="fw-bold">45.5%</span></div>
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="d-inline-block w-12 h-12 bg-white border border-3 border-auditory-color rounded-circle"></span>
+                                                <div class="text-13 mt-2">Auditori <span class="fw-bold">32.2%</span></div>
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="d-inline-block w-12 h-12 bg-white border border-3 border-reading-color rounded-circle"></span>
+                                                <div class="text-13 mt-2">Reading <span class="fw-bold">10.5%</span></div>
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="d-inline-block w-12 h-12 bg-white border border-3 border-kinesthetic-color rounded-circle"></span>
+                                                <div class="text-13 mt-2">Kinestetik <span class="fw-bold">11.8%</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Styles Explanation Section -->
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="learning-style-card visual text-center">
+                        <div class="icon" style="background-color: rgba(255, 255, 255, 0.2);">
+                            <i class="ph ph-eye"></i>
+                        </div>
+                        <h3>Visual</h3>
+                        <p>Pembelajar visual memahami dan mengingat informasi terbaik ketika mereka melihatnya.</p>
+                        <ul>
+                            <li>Mudah mengingat apa yang mereka lihat</li>
+                            <li>Lebih suka diagram dan grafik</li>
+                            <li>Memperhatikan detail visual</li>
+                            <li>Lebih suka membaca daripada mendengarkan</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="learning-style-card auditory text-center">
+                        <div class="icon" style="background-color: rgba(255, 255, 255, 0.2);">
+                            <i class="ph ph-ear"></i>
+                        </div>
+                        <h3>Auditori</h3>
+                        <p>Pembelajar auditori belajar paling baik melalui mendengarkan dan berdiskusi.</p>
+                        <ul>
+                            <li>Mudah mengingat informasi yang didengar</li>
+                            <li>Menikmati diskusi dan debat</li>
+                            <li>Dapat mengikuti instruksi lisan dengan baik</li>
+                            <li>Suka menjelaskan ide-ide secara verbal</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="learning-style-card reading text-center">
+                        <div class="icon" style="background-color: rgba(0, 0, 0, 0.1);">
+                            <i class="ph ph-book-open"></i>
+                        </div>
+                        <h3>Reading</h3>
+                        <p>Pembelajar reading belajar terbaik melalui membaca dan menulis.</p>
+                        <ul>
+                            <li>Mengingat apa yang ditulis</li>
+                            <li>Menikmati membuat catatan</li>
+                            <li>Lebih suka informasi tertulis</li>
+                            <li>Memproses konsep melalui penulisan</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="learning-style-card kinesthetic text-center">
+                        <div class="icon" style="background-color: rgba(0, 0, 0, 0.1);">
+                            <i class="ph ph-hand-grabbing"></i>
+                        </div>
+                        <h3>Kinestetik</h3>
+                        <p>Pembelajar kinestetik belajar melalui gerakan dan pengalaman langsung.</p>
+                        <ul>
+                            <li>Belajar sambil melakukan aktivitas</li>
+                            <li>Mudah gelisah jika duduk lama</li>
+                            <li>Menikmati eksperimen praktis</li>
+                            <li>Lebih memilih pengalaman langsung</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-8">
+                    <!-- Student Profiles -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0">Profil Gaya Belajar Siswa</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- Individual Student Profile Cards -->
+                            <div class="student-card">
+                                <div class="student-avatar" style="background-color: var(--visual-color);">BS</div>
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="student-name">Budi Santoso</div>
+                                            <div class="text-muted small">Kelas 10A</div>
+                                        </div>
+                                        <div>
+                                            <span class="learning-style-label visual-label">Visual 65%</span>
+                                            <span class="learning-style-label auditory-label">Auditori 20%</span>
+                                            <span class="learning-style-label reading-label">Reading 10%</span>
+                                            <span class="learning-style-label kinesthetic-label">Kinestetik 5%</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 65%; background-color: var(--visual-color);" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 20%; background-color: var(--auditory-color);" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--reading-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 5%; background-color: var(--kinesthetic-color);" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#studentDetailModal">
+                                    <i class="ph ph-eye"></i>
+                                </a>
+                            </div>
+
+                            <div class="student-card">
+                                <div class="student-avatar" style="background-color: var(--auditory-color);">DJ</div>
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="student-name">Dewi Juwita</div>
+                                            <div class="text-muted small">Kelas 11B</div>
+                                        </div>
+                                        <div>
+                                            <span class="learning-style-label visual-label">Visual 15%</span>
+                                            <span class="learning-style-label auditory-label">Auditori 70%</span>
+                                            <span class="learning-style-label reading-label">Reading 10%</span>
+                                            <span class="learning-style-label kinesthetic-label">Kinestetik 5%</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 15%; background-color: var(--visual-color);" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 70%; background-color: var(--auditory-color);" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--reading-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 5%; background-color: var(--kinesthetic-color);" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#studentDetailModal">
+                                    <i class="ph ph-eye"></i>
+                                </a>
+                            </div>
+
+                            <div class="student-card">
+                                <div class="student-avatar" style="background-color: var(--reading-color);">RA</div>
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="student-name">Raka Aditya</div>
+                                            <div class="text-muted small">Kelas 9C</div>
+                                        </div>
+                                        <div>
+                                            <span class="learning-style-label visual-label">Visual 25%</span>
+                                            <span class="learning-style-label auditory-label">Auditori 15%</span>
+                                            <span class="learning-style-label reading-label">Reading 50%</span>
+                                            <span class="learning-style-label kinesthetic-label">Kinestetik 10%</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%; background-color: var(--visual-color);" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 15%; background-color: var(--auditory-color);" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 50%; background-color: var(--reading-color);" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--kinesthetic-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#studentDetailModal">
+                                    <i class="ph ph-eye"></i>
+                                </a>
+                            </div>
+
+                            <div class="student-card">
+                                <div class="student-avatar" style="background-color: var(--kinesthetic-color);">LM</div>
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="student-name">Lina Maulida</div>
+                                            <div class="text-muted small">Kelas 11B</div>
+                                        </div>
+                                        <div>
+                                            <span class="learning-style-label visual-label">Visual 10%</span>
+                                            <span class="learning-style-label auditory-label">Auditori 20%</span>
+                                            <span class="learning-style-label reading-label">Reading 15%</span>
+                                            <span class="learning-style-label kinesthetic-label">Kinestetik 55%</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--visual-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 20%; background-color: var(--auditory-color);" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 15%; background-color: var(--reading-color);" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 55%; background-color: var(--kinesthetic-color);" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#studentDetailModal">
+                                    <i class="ph ph-eye"></i>
+                                </a>
+                            </div>
+
+                            <div class="student-card">
+                                <div class="student-avatar" style="background-color: var(--visual-color);">SP</div>
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="student-name">Surya Pratama</div>
+                                            <div class="text-muted small">Kelas 10A</div>
+                                        </div>
+                                        <div>
+                                            <span class="learning-style-label visual-label">Visual 45%</span>
+                                            <span class="learning-style-label auditory-label">Auditori 35%</span>
+                                            <span class="learning-style-label reading-label">Reading 10%</span>
+                                            <span class="learning-style-label kinesthetic-label">Kinestetik 10%</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 45%; background-color: var(--visual-color);" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 35%; background-color: var(--auditory-color);" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--reading-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--kinesthetic-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#studentDetailModal">
+                                    <i class="ph ph-eye"></i>
+                                </a>
+                            </div>
+
+                            <!-- View More Button -->
+                            <div class="text-center mt-4">
+                                <button class="btn btn-outline-primary rounded-pill px-4">
+                                    Lihat Semua Siswa
+                                    <i class="ph ph-caret-down ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Radar Chart Comparison -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h4 class="mb-0">Perbandingan Gaya Belajar Per Kelas</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="radar-chart-container">
+                                <div id="learningStyleRadarChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Recommendations and Resources -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0">Rekomendasi Strategi Pembelajaran</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-4">
+                                <div class="recommendation-icon" style="background-color: rgba(102, 126, 234, 0.2);">
+                                    <i class="ph ph-eye" style="color: var(--visual-color);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Untuk Pembelajar Visual</h5>
+                                    <ul class="mb-0 ps-3">
+                                        <li>Sertakan diagram dan grafik dalam presentasi</li>
+                                        <li>Gunakan peta konsep untuk menjelaskan ide-ide</li>
+                                        <li>Tunjukkan video atau demonstrasi visual</li>
+                                        <li>Gunakan warna untuk menyoroti poin-poin penting</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex mb-4">
+                                <div class="recommendation-icon" style="background-color: rgba(46, 204, 113, 0.2);">
+                                    <i class="ph ph-ear" style="color: var(--auditory-color);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Untuk Pembelajar Auditori</h5>
+                                    <ul class="mb-0 ps-3">
+                                        <li>Lakukan diskusi kelompok dan debat</li>
+                                        <li>Gunakan rekaman audio untuk materi</li>
+                                        <li>Baca instruksi dengan keras</li>
+                                        <li>Minta siswa menjelaskan kembali konsep</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex mb-4">
+                                <div class="recommendation-icon" style="background-color: rgba(243, 156, 18, 0.2);">
+                                    <i class="ph ph-book-open" style="color: var(--reading-color);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Untuk Pembelajar Reading</h5>
+                                    <ul class="mb-0 ps-3">
+                                        <li>Berikan handout dan panduan tertulis</li>
+                                        <li>Gunakan jurnal refleksi</li>
+                                        <li>Dorong catatan terstruktur</li>
+                                        <li>Sediakan bacaan tambahan</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <div class="recommendation-icon" style="background-color: rgba(97, 66, 255, 0.2);">
+                                    <i class="ph ph-hand-grabbing" style="color: var(--kinesthetic-color);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Untuk Pembelajar Kinestetik</h5>
+                                    <ul class="mb-0 ps-3">
+                                        <li>Lakukan eksperimen dan aktivitas praktis</li>
+                                        <li>Integrasikan gerakan dalam pembelajaran</li>
+                                        <li>Gunakan permainan peran</li>
+                                        <li>Sediakan istirahat singkat untuk bergerak</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resource Materials -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h4 class="mb-0">Sumber Daya Pembelajaran</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="resource-card">
+                                <h5>
+                                    <i class="ph ph-eye me-2" style="color: var(--visual-color);"></i>
+                                    Sumber Daya Visual
+                                </h5>
+                                <ul>
+                                    <li>Template Infografis untuk Kelas</li>
+                                    <li>Kumpulan Peta Konsep Interaktif</li>
+                                    <li>Video Pembelajaran dengan Visualisasi 3D</li>
+                                </ul>
+                                <button class="btn btn-sm btn-outline-primary w-100">Akses Semua Sumber</button>
+                            </div>
+
+                            <div class="resource-card">
+                                <h5>
+                                    <i class="ph ph-ear me-2" style="color: var(--auditory-color);"></i>
+                                    Sumber Daya Auditori
+                                </h5>
+                                <ul>
+                                    <li>Panduan Diskusi Kelompok</li>
+                                    <li>Koleksi Podcast Pendidikan</li>
+                                    <li>Alat Perekaman dan Feedback Audio</li>
+                                </ul>
+                                <button class="btn btn-sm btn-outline-primary w-100">Akses Semua Sumber</button>
+                            </div>
+
+                            <div class="resource-card">
+                                <h5>
+                                    <i class="ph ph-book-open me-2" style="color: var(--reading-color);"></i>
+                                    Sumber Daya Reading
+                                </h5>
+                                <ul>
+                                    <li>Template Jurnal Refleksi</li>
+                                    <li>Panduan Membuat Catatan Cornell</li>
+                                    <li>Lembar Kerja Interaktif</li>
+                                </ul>
+                                <button class="btn btn-sm btn-outline-primary w-100">Akses Semua Sumber</button>
+                            </div>
+
+                            <div class="resource-card">
+                                <h5>
+                                    <i class="ph ph-hand-grabbing me-2" style="color: var(--kinesthetic-color);"></i>
+                                    Sumber Daya Kinestetik
+                                </h5>
+                                <ul>
+                                    <li>Panduan Eksperimen Praktis</li>
+                                    <li>Aktivitas Pembelajaran Berbasis Gerakan</li>
+                                    <li>Template Role-Play Pendidikan</li>
+                                </ul>
+                                <button class="btn btn-sm btn-outline-primary w-100">Akses Semua Sumber</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-footer">
+            <div class="flex-between flex-wrap gap-16">
+                <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright SmartMic 2025, All Right Reserved</p>
+                <div class="flex-align flex-wrap gap-16">
+                    <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Lisensi</a>
+                    <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Dukungan</a>
+                    <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Bantuan</a>
+                    <a href="#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Student Detail Modal -->
+    <div class="modal fade" id="studentDetailModal" tabindex="-1" aria-labelledby="studentDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--primary-light);">
+                    <h5 class="modal-title" id="studentDetailModalLabel">Detail Gaya Belajar: Budi Santoso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="student-avatar mx-auto mb-3" style="width: 80px; height: 80px; background-color: var(--visual-color); font-size: 24px;">BS</div>
+                            <h5>Budi Santoso</h5>
+                            <p class="text-muted">Kelas 10A</p>
+                            <div class="mt-3">
+                                <span class="d-block mb-2">Gaya Belajar Dominan:</span>
+                                <span class="badge bg-primary px-3 py-2 rounded-pill">Visual 65%</span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="mb-3">Distribusi Gaya Belajar</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Visual
+
+
+
+<span>Visual</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 65%; background-color: var(--visual-color);" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Auditori</span>
+                                    <span>20%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 20%; background-color: var(--auditory-color);" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Reading</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 10%; background-color: var(--reading-color);" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Kinestetik</span>
+                                    <span>5%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 5%; background-color: var(--kinesthetic-color);" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            
+                            <h6 class="mt-4 mb-3">Analisis AI</h6>
+                            <p>Budi adalah pembelajar dengan dominasi gaya belajar visual yang kuat. Dari rekaman audio yang dianalisis, AI mendeteksi bahwa ia sering merujuk pada diagram, gambar, dan visualisasi saat memahami konsep baru.</p>
+                            
+                            <h6 class="mt-4 mb-3">Rekomendasi Pembelajaran</h6>
+                            <ul>
+                                <li>Berikan materi dengan diagram dan bagan</li>
+                                <li>Gunakan peta konsep untuk menjelaskan topik kompleks</li>
+                                <li>Dorong penggunaan highlighter untuk menyoroti poin penting</li>
+                                <li>Sajikan informasi dengan visualisasi dan video</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Riwayat Pembelajaran</h6>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Fisika Dasar - Bab 3</span>
+                                    <span class="badge bg-success">Nilai: 95</span>
+                                </div>
+                                <div class="text-muted small">25 April 2025</div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Matematika - Trigonometri</span>
+                                    <span class="badge bg-success">Nilai: 92</span>
+                                </div>
+                                <div class="text-muted small">20 April 2025</div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Biologi - Genetika</span>
+                                    <span class="badge bg-success">Nilai: 90</span>
+                                </div>
+                                <div class="text-muted small">15 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Aktivitas Terkini</h6>
+                            <div class="mb-2">
+                                <div>Menyelesaikan 5 soal Fisika</div>
+                                <div class="text-muted small">2 jam yang lalu</div>
+                            </div>
+                            <div class="mb-2">
+                                <div>Mengakses modul Matematika</div>
+                                <div class="text-muted small">Kemarin, 15:30</div>
+                            </div>
+                            <div class="mb-2">
+                                <div>Melihat rangkuman Biologi</div>
+                                <div class="text-muted small">3 hari yang lalu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary">Lihat Laporan Lengkap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Jquery js -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap Bundle Js -->
+    <script src="assets/js/boostrap.bundle.min.js"></script>
+    <!-- Phosphor Js -->
+    <script src="assets/js/phosphor-icon.js"></script>
+    <!-- file upload -->
+    <script src="assets/js/file-upload.js"></script>
+    <!-- file upload -->
+    <script src="assets/js/plyr.js"></script>
+    <!-- dataTables -->
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <!-- full calendar -->
+    <script src="assets/js/full-calendar.js"></script>
+    <!-- jQuery UI -->
+    <script src="assets/js/jquery-ui.js"></script>
+    <!-- jQuery UI -->
+    <script src="assets/js/editor-quill.js"></script>
+    <!-- apex charts -->
+    <script src="assets/js/apexcharts.min.js"></script>
+    <!-- Calendar Js -->
+    <script src="assets/js/calendar.js"></script>
+    <!-- jvectormap Js -->
+    <script src="assets/js/jquery-jvectormap-2.0.5.min.js"></script>
+    <!-- jvectormap world Js -->
+    <script src="assets/js/jquery-jvectormap-world-mill-en.js"></script>
+    
+    <!-- main js -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // Donut Chart for Learning Style Distribution
+        var donutOptions = {
+            series: [45.5, 32.2, 10.5, 11.8],
+            chart: {
+                height: 350,
+                type: 'donut',
+            },
+            colors: ['var(--visual-color)', 'var(--auditory-color)', 'var(--reading-color)', 'var(--kinesthetic-color)'],
+            labels: ['Visual', 'Auditori', 'Reading', 'Kinestetik'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 300
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }],
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '55%'
+                    }
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: false
+            }
+        };
+
+        var donutChart = new ApexCharts(document.querySelector("#learningStyleDonutChart"), donutOptions);
+        donutChart.render();
+
+        // Radar Chart for Class Comparison
+        var radarOptions = {
+            series: [
+                {
+                    name: 'Kelas 10A',
+                    data: [65, 35, 25, 15],
+                },
+                {
+                    name: 'Kelas 11B',
+                    data: [40, 60, 30, 20],
+                },
+                {
+                    name: 'Kelas 9C',
+                    data: [30, 25, 45, 40],
+                }
+            ],
+            chart: {
+                height: 350,
+                type: 'radar',
+                toolbar: {
+                    show: false
+                },
+            },
+            colors: ['#4361ee', '#6142FF', '#f39c12'],
+            xaxis: {
+                categories: ['Visual', 'Auditori', 'Reading', 'Kinestetik'],
+                labels: {
+                    style: {
+                        fontSize: '14px',
+                        fontFamily: 'Poppins, sans-serif',
+                    }
+                }
+            },
+            yaxis: {
+                show: false,
+                min: 0,
+                max: 80
+            },
+            markers: {
+                size: 5
+            },
+            fill: {
+                opacity: 0.3
+            },
+            stroke: {
+                width: 2
+            },
+            legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontFamily: 'Poppins, sans-serif'
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + "%";
+                    }
+                }
+            }
+        };
+
+        var radarChart = new ApexCharts(document.querySelector("#learningStyleRadarChart"), radarOptions);
+        radarChart.render();
+
+        // Tab buttons functionality
+        document.getElementById('btnOverview').addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+        
+        document.getElementById('btnVisual').addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+        
+        document.getElementById('btnAuditory').addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+        
+        document.getElementById('btnReading').addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+        
+        document.getElementById('btnKinesthetic').addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    </script>
+</body>
+</html>
